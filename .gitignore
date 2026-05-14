@@ -46,4 +46,7 @@ node_modules/
 
 # Temp
 .temp/
-tmp/
+tmp/.env
+firebase-config.js
+.vscode/
+node_modules/
