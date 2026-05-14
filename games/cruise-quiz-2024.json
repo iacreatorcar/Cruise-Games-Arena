@@ -1,0 +1,49 @@
+{
+  "gameId": "cruise_quiz_2024",
+  "title": {
+    "en": "Cruise Quiz 2024",
+    "it": "Quiz della Crociera 2024",
+    "fr": "Quiz de Croisière 2024",
+    "de": "Kreuzfahrt-Quiz 2024",
+    "es": "Quiz del Crucero 2024"
+  },
+  "totalQuestions": 10,
+  "questions": [
+    {
+      "id": 1,
+      "text": {
+        "en": "What is the largest ocean on Earth?",
+        "it": "Qual è l'oceano più grande della Terra?",
+        "fr": "Quel est le plus grand océan sur Terre?",
+        "de": "Was ist der größte Ozean der Erde?",
+        "es": "¿Cuál es el océano más grande de la Tierra?"
+      },
+      "options": {
+        "en": ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"],
+        "it": ["Oceano Atlantico", "Oceano Indiano", "Oceano Artico", "Oceano Pacifico"],
+        "fr": ["Océan Atlantique", "Océan Indien", "Océan Arctique", "Océan Pacifique"],
+        "de": ["Atlantischer Ozean", "Indischer Ozean", "Arktischer Ozean", "Pazifischer Ozean"],
+        "es": ["Océano Atlántico", "Océano Índico", "Océano Ártico", "Océano Pacífico"]
+      },
+      "correct": 3
+    },
+    {
+      "id": 2,
+      "text": {
+        "en": "Which Italian city is famous for its canals?",
+        "it": "Quale città italiana è famosa per i suoi canali?",
+        "fr": "Quelle ville italienne est célèbre pour ses canaux?",
+        "de": "Welche italienische Stadt ist berühmt für ihre Kanäle?",
+        "es": "¿Qué ciudad italiana es famosa por sus canales?"
+      },
+      "options": {
+        "en": ["Rome", "Venice", "Florence", "Naples"],
+        "it": ["Roma", "Venezia", "Firenze", "Napoli"],
+        "fr": ["Rome", "Venise", "Florence", "Naples"],
+        "de": ["Rom", "Venedig", "Florenz", "Neapel"],
+        "es": ["Roma", "Venecia", "Florencia", "Nápoles"]
+      },
+      "correct": 1
+    }
+  ]
+}

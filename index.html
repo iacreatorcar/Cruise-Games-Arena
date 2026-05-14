@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Cruise Games Arena - Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script src="firebase-config.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="language-selector">
+                <select id="languageSelect" onchange="changeLanguage()">
+                    <option value="en">🇬🇧 English</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="de">🇩🇪 Deutsch</option>
+                    <option value="es">🇪🇸 Español</option>
+                </select>
+            </div>
+            <h1>🚢 CRUISE GAMES ARENA</h1>
+            <p id="tagline">Interactive Quiz Challenge</p>
+        </div>
+        
+        <div class="card" id="registrationView">
+            <h2 id="registerTitle">Player Registration</h2>
+            <div class="form-group">
+                <label id="nameLabel">Full Name *</label>
+                <input type="text" id="playerName" placeholder="Enter your full name">
+            </div>
+            <div class="form-group">
+                <label id="cabinLabel">Cabin Number *</label>
+                <input type="text" id="cabinNumber" placeholder="e.g., 1234">
+            </div>
+            <div class="form-group">
+                <label id="nationalityLabel">Nationality *</label>
+                <select id="nationality">
+                    <option value="">Select nationality</option>
+                    <option value="Italy">🇮🇹 Italy</option>
+                    <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                    <option value="France">🇫🇷 France</option>
+                    <option value="Germany">🇩🇪 Germany</option>
+                    <option value="Spain">🇪🇸 Spain</option>
+                    <option value="USA">🇺🇸 USA</option>
+                    <option value="Other">🌍 Other</option>
+                </select>
+            </div>
+            <button class="btn" onclick="registerPlayer()" id="startBtn">Start Game</button>
+        </div>
+        
+        <div class="card" id="quizView" style="display:none;">
+            <div class="question-container">
+                <div class="progress" id="questionProgress"></div>
+                <div class="question-text" id="questionText">Loading...</div>
+                <div class="options-grid" id="optionsContainer"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+        </div>
+        
+        <div class="card" id="completeView" style="display:none;">
+            <h2 id="completeTitle">🎉 Game Complete! 🎉</h2>
+            <p id="completeMessage">Thank you for playing!</p>
+            <p id="finalScore"></p>
+            <button class="btn" onclick="location.reload()" id="newGameBtn">New Game</button>
+        </div>
+    </div>
+    
+    <script>
+        let currentPlayer = null;
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let errors = 0;
+        let questions = [];
+        let currentLang = 'en';
+        
+        const translations = {
+            en: {
+                registerTitle: "Player Registration",
+                nameLabel: "Full Name *",
+                cabinLabel: "Cabin Number *",
+                nationalityLabel: "Nationality *",
+                startBtn: "Start Game",
+                completeTitle: "🎉 Game Complete! 🎉",
+                completeMessage: "Thank you for playing!",
+                newGameBtn: "New Game"
+            },
+            it: {
+                registerTitle: "Registrazione Giocatore",
+                nameLabel: "Nome Completo *",
+                cabinLabel: "Numero Cabina *",
+                nationalityLabel: "Nazionalità *",
+                startBtn: "Inizia Gioco",
+                completeTitle: "🎉 Gioco Completato! 🎉",
+                completeMessage: "Grazie per aver giocato!",
+                newGameBtn: "Nuovo Gioco"
+            },
+            fr: {
+                registerTitle: "Inscription Joueur",
+                nameLabel: "Nom Complet *",
+                cabinLabel: "Numéro de Cabine *",
+                nationalityLabel: "Nationalité *",
+                startBtn: "Commencer",
+                completeTitle: "🎉 Jeu Terminé! 🎉",
+                completeMessage: "Merci d'avoir joué!",
+                newGameBtn: "Nouveau Jeu"
+            },
+            de: {
+                registerTitle: "Spielerregistrierung",
+                nameLabel: "Vollständiger Name *",
+                cabinLabel: "Kabinenummer *",
+                nationalityLabel: "Nationalität *",
+                startBtn: "Spiel Starten",
+                completeTitle: "🎉 Spiel Beendet! 🎉",
+                completeMessage: "Danke fürs Spielen!",
+                newGameBtn: "Neues Spiel"
+            },
+            es: {
+                registerTitle: "Registro de Jugador",
+                nameLabel: "Nombre Completo *",
+                cabinLabel: "Número de Cabina *",
+                nationalityLabel: "Nacionalidad *",
+                startBtn: "Comenzar Juego",
+                completeTitle: "🎉 ¡Juego Completado! 🎉",
+                completeMessage: "¡Gracias por jugar!",
+                newGameBtn: "Nuevo Juego"
+            }
+        };
+        
+        function changeLanguage() {
+            currentLang = document.getElementById('languageSelect').value;
+            updateUITexts();
+        }
+        
+        function updateUITexts() {
+            const t = translations[currentLang];
+            if (document.getElementById('registerTitle')) 
+                document.getElementById('registerTitle').innerText = t.registerTitle;
+            if (document.getElementById('nameLabel')) 
+                document.getElementById('nameLabel').innerText = t.nameLabel;
+            if (document.getElementById('cabinLabel')) 
+                document.getElementById('cabinLabel').innerText = t.cabinLabel;
+            if (document.getElementById('nationalityLabel')) 
+                document.getElementById('nationalityLabel').innerText = t.nationalityLabel;
+            if (document.getElementById('startBtn')) 
+                document.getElementById('startBtn').innerText = t.startBtn;
+            if (document.getElementById('completeTitle')) 
+                document.getElementById('completeTitle').innerText = t.completeTitle;
+            if (document.getElementById('completeMessage')) 
+                document.getElementById('completeMessage').innerText = t.completeMessage;
+            if (document.getElementById('newGameBtn')) 
+                document.getElementById('newGameBtn').innerText = t.newGameBtn;
+        }
+        
+        async function registerPlayer() {
+            const name = document.getElementById('playerName').value;
+            const cabin = document.getElementById('cabinNumber').value;
+            const nationality = document.getElementById('nationality').value;
+            
+            if (!name || !cabin || !nationality) {
+                alert("Please fill all fields!");
+                return;
+            }
+            
+            currentPlayer = {
+                id: Date.now().toString(),
+                name: name,
+                cabin: cabin,
+                nationality: nationality,
+                score: 0,
+                errors: 0,
+                completed: false
+            };
+            
+            await playersRef.doc(currentPlayer.id).set(currentPlayer);
+            await loadGameData();
+            document.getElementById('registrationView').style.display = 'none';
+            document.getElementById('quizView').style.display = 'block';
+            loadQuestion();
+        }
+        
+        async function loadGameData() {
+            const gameSnapshot = await db.collection('games').doc('active').get();
+            if (gameSnapshot.exists) {
+                questions = gameSnapshot.data().questions;
+            } else {
+                // Default questions
+                questions = [
+                    {text: {en: "What is the largest ocean on Earth?"}, options: {en: ["Atlantic", "Indian", "Arctic", "Pacific"]}, correct: 3},
+                    {text: {en: "Which Italian city is famous for its canals?"}, options: {en: ["Rome", "Venice", "Florence", "Naples"]}, correct: 1}
+                ];
+            }
+        }
+        
+        function loadQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                completeGame();
+                return;
+            }
+            
+            const q = questions[currentQuestionIndex];
+            document.getElementById('questionProgress').innerText = `Question ${currentQuestionIndex + 1}/${questions.length}`;
+            document.getElementById('questionText').innerText = q.text[currentLang] || q.text.en;
+            
+            const optionsHtml = q.options[currentLang] || q.options.en;
+            document.getElementById('optionsContainer').innerHTML = optionsHtml.map((opt, idx) => 
+                `<button class="option-btn" onclick="answerQuestion(${idx})">${String.fromCharCode(65+idx)}. ${opt}</button>`
+            ).join('');
+        }
+        
+        async function answerQuestion(selectedIndex) {
+            const q = questions[currentQuestionIndex];
+            const isCorrect = (selectedIndex === q.correct);
+            
+            if (isCorrect) {
+                score++;
+                document.getElementById('feedback').innerHTML = '<span style="color:green">✅ Correct!</span>';
+            } else {
+                errors++;
+                document.getElementById('feedback').innerHTML = `<span style="color:red">❌ Wrong! Correct answer: ${String.fromCharCode(65+q.correct)}. ${(q.options[currentLang] || q.options.en)[q.correct]}</span>`;
+            }
+            
+            await playersRef.doc(currentPlayer.id).update({
+                score: score,
+                errors: errors,
+                lastAnswer: currentQuestionIndex
+            });
+            
+            currentQuestionIndex++;
+            
+            setTimeout(() => {
+                document.getElementById('feedback').innerHTML = '';
+                loadQuestion();
+            }, 1500);
+        }
+        
+        async function completeGame() {
+            await playersRef.doc(currentPlayer.id).update({
+                completed: true,
+                finalScore: score,
+                finalErrors: errors,
+                completionTime: new Date()
+            });
+            
+            document.getElementById('quizView').style.display = 'none';
+            document.getElementById('completeView').style.display = 'block';
+            document.getElementById('finalScore').innerHTML = `Your score: ${score}/${questions.length} | Errors: ${errors}`;
+        }
+        
+        // Load translations on page load
+        updateUITexts();
+    </script>
+</body>
+</html>
