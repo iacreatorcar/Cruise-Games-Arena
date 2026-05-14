@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Display - Cruise Games Arena</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .public-display {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            padding: 40px;
+            color: white;
+        }
+        .current-question {
+            background: rgba(255,255,255,0.15);
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .question-text-large {
+            font-size: 48px;
+            margin-bottom: 40px;
+        }
+        .options-large {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .option-large {
+            background: rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 24px;
+        }
+        .ranking-screen {
+            background: rgba(0,0,0,0.3);
+            border-radius: 20px;
+            padding: 20px;
+        }
+        .ranking-screen table {
+            width: 100%;
+            color: white;
+            font-size: 20px;
+        }
+        .ranking-screen th, .ranking-screen td {
+            padding: 12px;
+            text-align: left;
+        }
+        .podium-screen {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        @media (max-width: 768px) {
+            .question-text-large { font-size: 28px; }
+            .option-large { font-size: 16px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="public-display">
+        <div class="current-question">
+            <h2>🎯 CURRENT QUESTION</h2>
+            <div class="question-text-large" id="displayQuestion">Loading...</div>
+            <div class="options-large" id="displayOptions"></div>
+            <div id="statsBar" style="margin-top:20px; font-size:20px"></div>
+        </div>
+        
+        <div class="ranking-screen">
+            <h2 style="text-align:center">🏆 LIVE RANKINGS 🏆</h2>
+            <table id="displayRanking">
+                <thead><tr><th>Pos</th><th>Name</th><th>Cabin</th><th>Score</th><th>Errors</th></tr></thead>
+                <tbody id="displayRankingBody"></tbody>
+            </table>
+        </div>
+        
+        <div id="podiumDisplay" style="display:none;">
+            <div class="podium-screen" id="podiumScreen"></div>
+        </div>
+    </div>
+    
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-database-compat.js"></script>
+    <script>
+        async function updateDisplay() {
+            const snapshot = await db.collection('players').get();
+            let players = [];
+            snapshot.forEach(doc => players.push({ id: doc.id, ...doc.data() }));
+            
+            const sorted = [...players].sort((a,b) => (b.score || 0) - (a.score || 0));
+            const rankingBody = document.getElementById('displayRankingBody');
+            rankingBody.innerHTML = sorted.slice(0,8).map((p,idx) => `
+                <tr>
+                    <td>${idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : idx+1}</td>
+                    <td>${p.name || 'N/A'}</td>
+                    <td>${p.cabin || 'N/A'}</td>
+                    <td style="color:#fbbf24">${p.score || 0}</td>
+                    <td style="color:#f56565">${p.errors || 0}</td>
+                </tr>
+            `).join('');
+            
+            const allCompleted = players.length > 0 && players.every(p => p.completed === true);
+            if (allCompleted && players.length > 0) {
+                document.getElementById('podiumDisplay').style.display = 'block';
+                const winners = sorted.slice(0,3);
+                document.getElementById('podiumScreen').innerHTML = `
+                    <div style="text-align:center;background:gold;color:black;padding:30px;border-radius:20px">
+                        <h1>🏆 WINNER 🏆</h1>
+                        <h2>${winners[0]?.name}</h2>
+                        <p>Cabin ${winners[0]?.cabin} | ${winners[0]?.nationality}</p>
+                        <p>Score: ${winners[0]?.score}/10</p>
+                    </div>
+                `;
+            }
+        }
+        
+        setInterval(updateDisplay, 3000);
+        updateDisplay();
+    </script>
+</body>
+</html>
