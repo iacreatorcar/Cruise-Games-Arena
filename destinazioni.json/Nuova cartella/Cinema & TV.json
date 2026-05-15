@@ -1,0 +1,55 @@
+{
+  "name": "🎬 Cinema & TV",
+  "questions": [
+    {
+      "text": "Chi ha interpretato Jack in 'Titanic'?",
+      "options": ["Brad Pitt", "Leonardo DiCaprio", "Johnny Depp", "Matt Damon"],
+      "correct": 1
+    },
+    {
+      "text": "Quale film ha vinto l'Oscar 2024 come miglior film?",
+      "options": ["Barbie", "Oppenheimer", "Poor Things", "Killers of the Flower Moon"],
+      "correct": 1
+    },
+    {
+      "text": "Quale serie TV ha la famiglia Stark?",
+      "options": ["Vikings", "The Witcher", "Game of Thrones", "The Last Kingdom"],
+      "correct": 2
+    },
+    {
+      "text": "Chi è il regista di 'Inception'?",
+      "options": ["Spielberg", "Tarantino", "Nolan", "Fincher"],
+      "correct": 2
+    },
+    {
+      "text": "Quale attore interpreta Iron Man?",
+      "options": ["Chris Evans", "Chris Hemsworth", "Robert Downey Jr", "Scarlett Johansson"],
+      "correct": 2
+    },
+    {
+      "text": "Quale cartone animato ha come protagonisti Topolino e Pippo?",
+      "options": ["Frozen", "Toy Story", "Mickey Mouse", "Shrek"],
+      "correct": 2
+    },
+    {
+      "text": "Quale cantante recitò in 'A Star Is Born'?",
+      "options": ["Taylor Swift", "Beyoncé", "Lady Gaga", "Rihanna"],
+      "correct": 2
+    },
+    {
+      "text": "Chi ha diretto 'The Godfather'?",
+      "options": ["Scorsese", "Coppola", "De Palma", "Lucas"],
+      "correct": 1
+    },
+    {
+      "text": "Quale film Disney ha 'Hakuna Matata'?",
+      "options": ["Aladdin", "Il Re Leone", "La Sirenetta", "Pocahontas"],
+      "correct": 1
+    },
+    {
+      "text": "Quale attore interpreta James Bond nel 2024?",
+      "options": ["Daniel Craig", "Idris Elba", "Tom Hardy", "Henry Cavill"],
+      "correct": 0
+    }
+  ]
+}

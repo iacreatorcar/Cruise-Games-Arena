@@ -1,0 +1,55 @@
+{
+  "name": "⚽ Sport e Competizioni",
+  "questions": [
+    {
+      "text": "Chi ha vinto il mondiale 2022?",
+      "options": ["Francia", "Argentina", "Croazia", "Brasile"],
+      "correct": 1
+    },
+    {
+      "text": "Quale tennista ha vinto più Slam?",
+      "options": ["Nadal", "Federer", "Djokovic", "Sampras"],
+      "correct": 2
+    },
+    {
+      "text": "Chi ha vinto la Coppa America 2024?",
+      "options": ["Brasile", "Argentina", "Uruguay", "Colombia"],
+      "correct": 1
+    },
+    {
+      "text": "Quale squadra ha vinto la Champions League 2024?",
+      "options": ["Manchester City", "Real Madrid", "Bayern Monaco", "Paris Saint-Germain"],
+      "correct": 0
+    },
+    {
+      "text": "Chi è il pilota più vincente in F1?",
+      "options": ["Schumacher", "Hamilton", "Vettel", "Verstappen"],
+      "correct": 1
+    },
+    {
+      "text": "Quale atleta ha vinto più Olimpiadi?",
+      "options": ["Usain Bolt", "Michael Phelps", "Carl Lewis", "Simone Biles"],
+      "correct": 1
+    },
+    {
+      "text": "Chi ha vinto il Tour de France 2023?",
+      "options": ["Pogacar", "Vingegaard", "Evenepoel", "Thomas"],
+      "correct": 1
+    },
+    {
+      "text": "Quale squadra NBA ha vinto più titoli?",
+      "options": ["Lakers", "Celtics", "Bulls", "Warriors"],
+      "correct": 1
+    },
+    {
+      "text": "Chi ha vinto il Super Bowl 2024?",
+      "options": ["Kansas City Chiefs", "San Francisco 49ers", "Baltimore Ravens", "Philadelphia Eagles"],
+      "correct": 0
+    },
+    {
+      "text": "Quale pugile è conosciuto come 'The Greatest'?",
+      "options": ["Tyson", "Ali", "Holyfield", "Lewis"],
+      "correct": 1
+    }
+  ]
+}

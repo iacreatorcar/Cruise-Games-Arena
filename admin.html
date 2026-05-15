@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Panel - Cruise Games</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+        h1 { text-align: center; color: #f1c40f; }
+        .stats {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 30px 0;
+        }
+        .card {
+            background: #16213e;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            min-width: 150px;
+        }
+        .number {
+            font-size: 36px;
+            font-weight: bold;
+            color: #f1c40f;
+        }
+        table {
+            width: 100%;
+            background: #16213e;
+            border-radius: 10px;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        th {
+            background: #0f3460;
+        }
+        button {
+            background: #e74c3c;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 5px;
+            font-size: 14px;
+        }
+        .print-btn {
+            background: #3498db;
+        }
+        .winner {
+            background: gold;
+            color: black;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🎮 CRUISE GAMES ARENA - ADMIN</h1>
+    
+    <div class="stats">
+        <div class="card">
+            <h3>👥 Giocatori</h3>
+            <div class="number" id="total">0</div>
+        </div>
+        <div class="card">
+            <h3>✅ Completati</h3>
+            <div class="number" id="completed">0</div>
+        </div>
+        <div class="card">
+            <h3>⭐ Zero Errori</h3>
+            <div class="number" id="zeroErrors">0</div>
+        </div>
+        <div class="card">
+            <h3>📈 Media Punti</h3>
+            <div class="number" id="avgScore">0</div>
+        </div>
+    </div>
+
+    <div style="text-align: center; margin: 20px 0;">
+        <button class="print-btn" onclick="window.print()">🖨️ PRINT / SAVE PDF</button>
+        <button onclick="exportToCSV()">📊 Export CSV</button>
+    </div>
+
+    <h2>🏆 CLASSIFICA LIVE</h2>
+    <table id="rankingTable">
+        <thead>
+            <tr><th>Pos</th><th>Nome</th><th>Cabina</th><th>Nazionalità</th><th>Punti</th><th>Errori</th><th>Status</th></tr>
+        </thead>
+        <tbody id="rankingBody">
+            <tr><td colspan="7" style="text-align:center">In attesa di giocatori...</td></tr>
+        </tbody>
+    </table>
+
+    <div id="winnerDiv" style="display: none;"></div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+    
+    <script>
+        console.log("Admin panel loaded");
+        
+        async function loadPlayers() {
+            console.log("Loading players...");
+            
+            if (!db) {
+                console.error("Firebase db not ready");
+                document.getElementById('rankingBody').innerHTML = '<tr><td colspan="7">Firebase non connesso</td></tr>';
+                return;
+            }
+            
+            try {
+                const snapshot = await db.collection('players').get();
+                const players = [];
+                snapshot.forEach(doc => players.push({ id: doc.id, ...doc.data() }));
+                
+                console.log("Players found:", players.length);
+                
+                // Stats
+                const total = players.length;
+                const completed = players.filter(p => p.completed === true).length;
+                const zeroErrors = players.filter(p => p.errors === 0 && p.completed).length;
+                const avgScore = total > 0 ? (players.reduce((sum, p) => sum + (p.score || 0), 0) / total).toFixed(1) : 0;
+                
+                document.getElementById('total').innerHTML = total;
+                document.getElementById('completed').innerHTML = completed;
+                document.getElementById('zeroErrors').innerHTML = zeroErrors;
+                document.getElementById('avgScore').innerHTML = avgScore;
+                
+                // Ranking
+                const sorted = [...players].sort((a, b) => (b.score || 0) - (a.score || 0));
+                
+                if (sorted.length === 0) {
+                    document.getElementById('rankingBody').innerHTML = '<tr><td colspan="7" style="text-align:center">⏳ Nessun giocatore ancora registrato</td></tr>';
+                } else {
+                    document.getElementById('rankingBody').innerHTML = sorted.map((p, i) => `
+                        <tr>
+                            <td>${i === 0 ? '🥇' : i === 1 ? '🥈' : i === 2 ? '🥉' : i+1}</td>
+                            <td>${p.name || '-'}</td>
+                            <td>${p.cabin || '-'}</td>
+                            <td>${p.nationality || '-'}</td>
+                            <td style="color:#f1c40f; font-weight:bold">${p.score || 0}</td>
+                            <td style="color:#e74c3c">${p.errors || 0}</td>
+                            <td>${p.completed ? '✅ Done' : '🔄 Playing'}</td>
+                        </tr>
+                    `).join('');
+                }
+                
+                // Check if all completed
+                if (total > 0 && players.every(p => p.completed === true)) {
+                    const winners = sorted.slice(0, 3);
+                    document.getElementById('winnerDiv').innerHTML = `
+                        <div class="winner">
+                            <h2>🏆 VINCITORI 🏆</h2>
+                            <h3>🥇 1°: ${winners[0]?.name || '-'} - ${winners[0]?.score || 0} punti</h3>
+                            ${winners[1] ? `<h3>🥈 2°: ${winners[1].name} - ${winners[1].score} punti</h3>` : ''}
+                            ${winners[2] ? `<h3>🥉 3°: ${winners[2].name} - ${winners[2].score} punti</h3>` : ''}
+                        </div>
+                    `;
+                    document.getElementById('winnerDiv').style.display = 'block';
+                } else {
+                    document.getElementById('winnerDiv').style.display = 'none';
+                }
+                
+            } catch (error) {
+                console.error("Error loading players:", error);
+                document.getElementById('rankingBody').innerHTML = '<tr><td colspan="7">Errore caricamento: ' + error.message + '</td></tr>';
+            }
+        }
+        
+        function exportToCSV() {
+            alert('Funzione CSV - verrà implementata');
+        }
+        
+        // Carica ogni 3 secondi
+        setInterval(loadPlayers, 3000);
+        loadPlayers();
+    </script>
+</body>
+</html>

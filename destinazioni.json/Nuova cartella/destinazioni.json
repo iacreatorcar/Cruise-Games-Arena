@@ -1,0 +1,55 @@
+{
+  "name": "🏝️ Indovina la Destinazione",
+  "questions": [
+    {
+      "text": "Quale città è conosciuta come 'La Serenissima'?",
+      "options": ["Roma", "Venezia", "Firenze", "Napoli"],
+      "correct": 1
+    },
+    {
+      "text": "Quale isola greca è famosa per i mulini a vento?",
+      "options": ["Creta", "Santorini", "Mykonos", "Rhodes"],
+      "correct": 2
+    },
+    {
+      "text": "Quale porto è il più grande del Mediterraneo?",
+      "options": ["Barcellona", "Marsiglia", "Genova", "Valencia"],
+      "correct": 0
+    },
+    {
+      "text": "Quale città caraibica è famosa per il 'Carnival'?",
+      "options": ["Nassau", "San Juan", "Ocho Rios", "Santo Domingo"],
+      "correct": 1
+    },
+    {
+      "text": "Quale fiordo norvegese è Patrimonio UNESCO?",
+      "options": ["Sognefjord", "Geirangerfjord", "Hardangerfjord", "Lysefjord"],
+      "correct": 1
+    },
+    {
+      "text": "Quale città è chiamata 'La Perla del Pacifico'?",
+      "options": ["Sydney", "Acapulco", "San Francisco", "Honolulu"],
+      "correct": 1
+    },
+    {
+      "text": "Quale isola italiana è famosa per la 'Sardara'?",
+      "options": ["Sicilia", "Capri", "Ischia", "Sardegna"],
+      "correct": 3
+    },
+    {
+      "text": "Quale città turca si affaccia su due continenti?",
+      "options": ["Istanbul", "Ankara", "Smirne", "Antalya"],
+      "correct": 0
+    },
+    {
+      "text": "Quale isola delle Maldive è la più visitata?",
+      "options": ["Malé", "Hulhumalé", "Maafushi", "Vilamendhoo"],
+      "correct": 0
+    },
+    {
+      "text": "Quale città è famosa per l'Oktoberfest?",
+      "options": ["Berlino", "Vienna", "Monaco", "Zurigo"],
+      "correct": 2
+    }
+  ]
+}

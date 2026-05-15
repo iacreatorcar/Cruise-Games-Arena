@@ -1,0 +1,55 @@
+{
+  "name": "🎵 Musica e Canzoni",
+  "questions": [
+    {
+      "text": "Chi ha cantato 'Like a Virgin'?",
+      "options": ["Madonna", "Britney Spears", "Kylie Minogue", "Cher"],
+      "correct": 0
+    },
+    {
+      "text": "Quale band ha fatto 'Bohemian Rhapsody'?",
+      "options": ["The Beatles", "Queen", "Led Zeppelin", "Pink Floyd"],
+      "correct": 1
+    },
+    {
+      "text": "Quale cantante è conosciuta come 'Queen of Pop'?",
+      "options": ["Beyoncé", "Madonna", "Lady Gaga", "Taylor Swift"],
+      "correct": 1
+    },
+    {
+      "text": "Quale canzone degli ABBA è la più famosa?",
+      "options": ["Mamma Mia", "Dancing Queen", "Waterloo", "Fernando"],
+      "correct": 1
+    },
+    {
+      "text": "Chi ha vinto Sanremo 2024?",
+      "options": ["Geolier", "Angelina Mango", "Annalisa", "Mahmood"],
+      "correct": 1
+    },
+    {
+      "text": "Quale cantante ha fatto 'Blinding Lights'?",
+      "options": ["The Weeknd", "Post Malone", "Drake", "Justin Bieber"],
+      "correct": 0
+    },
+    {
+      "text": "Quale gruppo ha fatto 'Sweet Child o' Mine'?",
+      "options": ["Metallica", "Guns N' Roses", "AC/DC", "Nirvana"],
+      "correct": 1
+    },
+    {
+      "text": "Quale cantante ha avuto il successo 'Rolling in the Deep'?",
+      "options": ["Adele", "Amy Winehouse", "Duffy", "Paloma Faith"],
+      "correct": 0
+    },
+    {
+      "text": "Chi ha cantato 'Hallelujah'?",
+      "options": ["Bob Dylan", "Leonard Cohen", "Jeff Buckley", "Tutti"],
+      "correct": 3
+    },
+    {
+      "text": "Quale band ha 'Yellow Submarine'?",
+      "options": ["The Rolling Stones", "The Who", "The Beatles", "The Kinks"],
+      "correct": 2
+    }
+  ]
+}

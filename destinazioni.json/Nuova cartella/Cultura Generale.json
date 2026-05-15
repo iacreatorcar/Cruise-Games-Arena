@@ -1,0 +1,55 @@
+{
+  "name": "📚 Cultura Generale",
+  "questions": [
+    {
+      "text": "Chi dipinse la Mona Lisa?",
+      "options": ["Van Gogh", "Picasso", "Leonardo da Vinci", "Rembrandt"],
+      "correct": 2
+    },
+    {
+      "text": "Quale è la montagna più alta del mondo?",
+      "options": ["K2", "Everest", "Kangchenjunga", "Makalu"],
+      "correct": 1
+    },
+    {
+      "text": "Chi scrisse 'La Divina Commedia'?",
+      "options": ["Petrarca", "Boccaccio", "Dante Alighieri", "Ariosto"],
+      "correct": 2
+    },
+    {
+      "text": "Quale anno cadde il Muro di Berlino?",
+      "options": ["1987", "1988", "1989", "1990"],
+      "correct": 2
+    },
+    {
+      "text": "Chi è il personaggio dei fumetti di Topolino?",
+      "options": ["Paperino", "Pippo", "Pluto", "Tutti"],
+      "correct": 3
+    },
+    {
+      "text": "Quale pianeta è conosciuto come il 'Pianeta Rosso'?",
+      "options": ["Giove", "Marte", "Venere", "Saturno"],
+      "correct": 1
+    },
+    {
+      "text": "Quale cantante ha fatto 'Thriller'?",
+      "options": ["Prince", "Madonna", "Michael Jackson", "Whitney Houston"],
+      "correct": 2
+    },
+    {
+      "text": "Quale squadra ha vinto più Champions League?",
+      "options": ["Barcellona", "Bayern", "Milan", "Real Madrid"],
+      "correct": 3
+    },
+    {
+      "text": "Quale animale è il simbolo dell'Australia?",
+      "options": ["Koala", "Canguro", "Ornitorinco", "Dingo"],
+      "correct": 1
+    },
+    {
+      "text": "Quale famoso scienziato sviluppò la teoria della relatività?",
+      "options": ["Newton", "Galileo", "Einstein", "Hawking"],
+      "correct": 2
+    }
+  ]
+}
