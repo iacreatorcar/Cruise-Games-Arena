@@ -288,6 +288,19 @@ text
 3. Open `start-here.html` in browser when server is running
 4. Share the README with your team
 
+## 👨‍💻 Contact & Support
+
+**Founder & Developer:** Carmine D'Alise
+
+📧 **Email:** [carmine@cdalise.com](mailto:carmine@cdalise.com)
+
+🔗 **GitHub:** [github.com/iacreatorcar](https://github.com/iacreatorcar)
+
+🌐 **Website:** [cdalise.com](https://cdalise.com)
+
+---
+
+*For commercial inquiries, cruise ship installations, or custom development, feel free to reach out.*
 ---
 
 **Now you have a complete professional package!** 🚢
