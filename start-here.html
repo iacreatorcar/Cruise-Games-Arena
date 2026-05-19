@@ -67,9 +67,13 @@
     <script src="firebase-config.js"></script>
 
     <script>
-        const IP = '192.168.1.147';
-        const PORT = 5500;
-        const PLAYER_URL = `http://${IP}:${PORT}/index.html`;
+        // Per Vercel (pubblico)
+const PLAYER_URL = 'https://cruise-games-arena.vercel.app/index.html';
+
+// Per test locale (commenta la riga sopra e usa queste)
+// const IP = '192.168.1.147';
+// const PORT = 5500;
+// const PLAYER_URL = `http://${IP}:${PORT}/index.html`;
         
         document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(PLAYER_URL)}`;
         
