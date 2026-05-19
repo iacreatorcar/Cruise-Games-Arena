@@ -16,24 +16,9 @@
 
 <br>
 
-<!-- Immagine hero - cambia il percorso con il tuo file -->
-<img src="assets/dashboard.png" width="800" alt="Cruise Games Arena Dashboard" style="border-radius: 20px; border: 1px solid #333;">
+<img src="assets/dashboard.png" width="800" alt="Cruise Games Arena Demo" style="border-radius: 20px;">
 
 </div>
-
----
-
-## 🖼️ Screenshots
-
-<div align="center">
-
-| Admin Dashboard | Public Display | Player View |
-|:---:|:---:|:---:|
-| ![Admin Dashboard](assets/dashboard.png) | *Add display.png* | *Add player.png* |
-
-</div>
-
-*Screenshots from the live demo system*
 
 ---
 
@@ -60,10 +45,10 @@
 
 | Step | Action |
 |------|--------|
-| 1️⃣ | **Host/Animator** selects a game and clicks START |
+| 1️⃣ | **Animator** selects a game and clicks START |
 | 2️⃣ | **Passengers** scan QR code with their phone |
 | 3️⃣ | **Register** with Name, Cabin, Nationality |
-| 4️⃣ | **Answer** questions (10 per game) |
+| 4️⃣ | **Answer** 10 questions |
 | 5️⃣ | **Live rankings** appear on public screen |
 | 6️⃣ | **Winners** are automatically announced |
 
@@ -71,7 +56,7 @@
 
 ---
 
-## 🏗️ System Architecture
+## 🏗️ System Architecture (Simplified)
 
 ┌─────────────────────────────────────────────────────────┐
 │ CRUISE SHIP NETWORK │
@@ -90,6 +75,17 @@
 │ │
 └─────────────────────────────────────────────────────────┘
 
+---
+
+## 🖼️ Screenshots
+
+<div align="center">
+
+| Admin Panel | Public Display | Player View |
+|:---:|:---:|:---:|
+| ![Admin](assets/screenshots/admin.png) | ![Display](assets/screenshots/display.png) | ![Player](assets/screenshots/player.png) |
+
+</div>
 
 ---
 
@@ -112,7 +108,7 @@
 - 🚢 **Cruise Ships** – Main entertainment activity
 - 🏖️ **Resorts** – Poolside / evening quizzes
 - 🏨 **Hotels** – Guest engagement programs
-- 🎪 **Corporate Events** – Team building activities
+- 🎪 **Events** – Team building activities
 
 ---
 
@@ -124,6 +120,9 @@
 | 🌍 Geography Challenge | 10 | Hard |
 | 📜 History Trivia | 10 | Medium |
 | 🏝️ Destination Challenge | 10 | Easy |
+| 🎬 Cinema & TV | 10 | Medium |
+| 🎵 Music Trivia | 10 | Easy |
+| ⚽ Sports Quiz | 10 | Medium |
 
 ---
 
@@ -134,8 +133,8 @@
 | Frontend | Backend | Hosting |
 |:---:|:---:|:---:|
 | HTML5 | Firebase Firestore | Vercel |
-| CSS3 | Realtime Database | GitHub |
-| JavaScript (ES6+) | - | - |
+| CSS3 | Firebase Auth | GitHub |
+| JavaScript (ES6+) | Realtime Database | - |
 
 </div>
 
