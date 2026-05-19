@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Public Display - Cruise Games Arena</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', sans-serif;
+            color: white;
+            padding: 20px;
+        }
+        .container { max-width: 1400px; margin: 0 auto; text-align: center; }
+        .logo { font-size: 80px; margin-bottom: 10px; }
+        .title { font-size: 48px; background: linear-gradient(135deg, #f1c40f, #e74c3c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 30px; }
+        .question-box { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 40px; padding: 50px; margin-bottom: 30px; }
+        .question-text { font-size: 48px; font-weight: bold; margin-bottom: 40px; }
+        .options { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .option { background: rgba(255,255,255,0.15); padding: 25px; border-radius: 20px; font-size: 28px; font-weight: bold; }
+        .stats { display: flex; gap: 20px; justify-content: center; margin-bottom: 30px; flex-wrap: wrap; }
+        .stat-card { background: rgba(255,255,255,0.1); padding: 20px 30px; border-radius: 20px; }
+        .stat-number { font-size: 48px; font-weight: bold; color: #f1c40f; }
+        .ranking { background: rgba(255,255,255,0.05); border-radius: 30px; padding: 20px; margin-top: 30px; }
+        .ranking-table { width: 100%; border-collapse: collapse; }
+        .ranking-table th, .ranking-table td { padding: 15px; text-align: left; font-size: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .rank-1 { background: rgba(255,215,0,0.2); }
+        .rank-2 { background: rgba(192,192,192,0.2); }
+        .rank-3 { background: rgba(205,127,50,0.2); }
+        .winner-screen { text-align: center; animation: fadeIn 1s; }
+        .winner-logo { font-size: 100px; }
+        .winner-title { font-size: 56px; background: linear-gradient(135deg, #ffd700, #ffb347); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .winner-card { background: linear-gradient(135deg, #ffd700, #ffb347); color: #1a1a2e; padding: 40px; border-radius: 30px; display: inline-block; margin-top: 30px; }
+        .winner-name { font-size: 48px; font-weight: bold; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @media (max-width: 768px) { .question-text { font-size: 28px; } .option { font-size: 18px; padding: 15px; } .options { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">🚢</div>
+        <div class="title">CRUISE GAMES ARENA</div>
+        
+        <div id="gameplay">
+            <div class="question-box">
+                <div class="question-text" id="questionText">Waiting for game...</div>
+                <div class="options" id="optionsGrid">
+                    <div class="option">A. ---</div><div class="option">B. ---</div><div class="option">C. ---</div><div class="option">D. ---</div>
+                </div>
+            </div>
+            <div class="stats">
+                <div class="stat-card"><div class="stat-number" id="totalPlayers">0</div><div>Players</div></div>
+                <div class="stat-card"><div class="stat-number" id="answeredCount">0</div><div>Answered</div></div>
+            </div>
+            <div class="ranking">
+                <h2>🏆 LIVE RANKINGS 🏆</h2>
+                <table class="ranking-table"><thead><tr><th>Pos</th><th>Name</th><th>Cabin</th><th>Score</th></tr></thead><tbody id="rankingBody"><tr><td colspan="4">Waiting...</td></tr></tbody></table>
+            </div>
+        </div>
+        
+        <div id="winnerScreen" style="display: none;">
+            <div class="winner-logo">🏆🚢🏆</div>
+            <div class="winner-title">WINNER</div>
+            <div id="winnerCard" class="winner-card"></div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        let currentQuestionIndex = 0, players = [], questions = [], gameCompleted = false;
+        
+        async function loadQuestions() {
+            const gameSnapshot = await db.collection('games').doc('active').get();
+            questions = gameSnapshot.exists ? gameSnapshot.data().questions : [];
+            if (questions.length) displayQuestion();
+        }
+        
+        function displayQuestion() {
+            if (gameCompleted || !questions.length) return;
+            const q = questions[currentQuestionIndex];
+            document.getElementById('questionText').innerHTML = q.text;
+            document.getElementById('optionsGrid').innerHTML = q.options.map(opt => `<div class="option">${opt}</div>`).join('');
+        }
+        
+        async function loadRanking() {
+            const snapshot = await db.collection('players').get();
+            players = []; snapshot.forEach(doc => players.push(doc.data()));
+            document.getElementById('totalPlayers').innerHTML = players.length;
+            const answered = players.filter(p => p.lastQuestion === currentQuestionIndex).length;
+            document.getElementById('answeredCount').innerHTML = answered;
+            const sorted = [...players].sort((a,b) => (b.score||0) - (a.score||0));
+            const rankingBody = document.getElementById('rankingBody');
+            if (sorted.length === 0) rankingBody.innerHTML = '<tr><td colspan="4">Waiting...</td></tr>';
+            else rankingBody.innerHTML = sorted.slice(0,10).map((p,i) => `<tr class="rank-${i+1}"><td>${i===0?'🥇':i===1?'🥈':i===2?'🥉':i+1}</td><td>${p.name||'-'}</td><td>${p.cabin||'-'}</td><td style="color:#f1c40f">${p.score||0}</td></tr>`).join('');
+            
+            const allCompleted = players.length > 0 && players.every(p => p.completed === true);
+            if (allCompleted && !gameCompleted) showWinner(sorted);
+        }
+        
+        function showWinner(sorted) {
+            gameCompleted = true;
+            document.getElementById('gameplay').style.display = 'none';
+            const winner = sorted[0];
+            document.getElementById('winnerCard').innerHTML = `<div class="winner-name">${winner?.name || '-'}</div><div>Cabin: ${winner?.cabin || '-'}</div><div>Nationality: ${winner?.nationality || '-'}</div><div>🏆 ${winner?.score || 0} points</div>`;
+            document.getElementById('winnerScreen').style.display = 'block';
+        }
+        
+        // Auto-next question from Firebase
+        if (db) {
+            db.collection('settings').doc('gameCommands').onSnapshot(doc => {
+                if (doc.exists && doc.data().command === 'next' && !gameCompleted) {
+                    if (currentQuestionIndex < questions.length - 1) {
+                        currentQuestionIndex++;
+                        displayQuestion();
+                    }
+                }
+            });
+        }
+        
+        loadQuestions();
+        setInterval(loadRanking, 2000);
+    </script>
+</body>
+</html>

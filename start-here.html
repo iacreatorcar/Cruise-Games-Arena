@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cruise Games Arena - Scan to Play</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', sans-serif;
+            padding: 20px;
+        }
+        .card {
+            background: white;
+            border-radius: 40px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+        }
+        .logo { font-size: 70px; margin-bottom: 10px; }
+        h1 { color: #333; margin-bottom: 5px; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 14px; }
+        .qr-container { margin: 20px 0; }
+        .qr-container img { width: 220px; height: 220px; border-radius: 20px; }
+        .steps { text-align: left; margin-top: 30px; background: #f8f9fa; padding: 20px; border-radius: 20px; }
+        .steps h3 { color: #333; margin-bottom: 15px; }
+        .steps ol { padding-left: 20px; color: #555; }
+        .steps li { margin: 10px 0; }
+        .status { margin-top: 20px; padding: 12px; border-radius: 15px; font-weight: bold; }
+        .status-active { background: #2ecc71; color: white; }
+        .status-waiting { background: #f39c12; color: white; }
+        .status-closed { background: #e74c3c; color: white; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="logo">🚢</div>
+        <h1>CRUISE GAMES ARENA</h1>
+        <p class="subtitle">Scan to play on your phone</p>
+
+        <div class="qr-container">
+            <img id="qrImage" src="" alt="QR Code">
+        </div>
+
+        <div class="steps">
+            <h3>📱 How to play:</h3>
+            <ol>
+                <li>1️⃣ Scan the QR code with your phone camera</li>
+                <li>2️⃣ Register with Name, Cabin Number, Nationality</li>
+                <li>3️⃣ Wait for the host to start the game</li>
+                <li>4️⃣ Answer the questions and win!</li>
+            </ol>
+        </div>
+
+        <div id="gameStatus" class="status status-closed">🔴 Game not active - Wait for host</div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="firebase-config.js"></script>
+
+    <script>
+        const IP = '192.168.1.147';
+        const PORT = 5500;
+        const PLAYER_URL = `http://${IP}:${PORT}/index.html`;
+        
+        document.getElementById('qrImage').src = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(PLAYER_URL)}`;
+        
+        async function checkGameStatus() {
+            const gameState = await db.collection('settings').doc('gameState').get();
+            const statusDiv = document.getElementById('gameStatus');
+            if (gameState.exists && gameState.data().status === 'active') {
+                statusDiv.innerHTML = '🟢 GAME ACTIVE - Scan and play!';
+                statusDiv.className = 'status status-active';
+            } else if (gameState.exists && gameState.data().status === 'waiting') {
+                statusDiv.innerHTML = '🟡 GAME PAUSED - Starting soon';
+                statusDiv.className = 'status status-waiting';
+            } else {
+                statusDiv.innerHTML = '🔴 GAME NOT ACTIVE - Wait for host';
+                statusDiv.className = 'status status-closed';
+            }
+        }
+        
+        if (db) db.collection('settings').doc('gameState').onSnapshot(() => checkGameStatus());
+        checkGameStatus();
+    </script>
+</body>
+</html>

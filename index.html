@@ -2,190 +2,79 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Cruise Games Arena - Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cruise Games Arena - Demo</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 20px;
-        }
+        body { font-family: 'Segoe UI', sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
         .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
-        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; position: relative; }
-        .header h1 { font-size: 1.8em; }
-        .language-selector { position: absolute; top: 15px; right: 15px; }
-        .language-selector select { padding: 5px 10px; border-radius: 8px; border: none; background: rgba(255,255,255,0.2); color: white; cursor: pointer; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; }
+        .demo-badge { background: #f1c40f; color: #333; padding: 5px 12px; border-radius: 20px; font-size: 12px; display: inline-block; margin-top: 10px; }
         .card { padding: 30px; }
         .form-group { margin-bottom: 20px; }
         .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
-        .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; }
-        .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border: none; border-radius: 10px; width: 100%; cursor: pointer; font-size: 18px; }
-        .question-container { text-align: center; }
-        .progress { font-size: 14px; color: #667eea; margin-bottom: 20px; }
-        .question-text { font-size: 24px; margin-bottom: 30px; color: #333; font-weight: bold; }
-        .options-grid { display: grid; gap: 12px; margin-bottom: 20px; }
-        .option-btn { background: #f0f0f0; border: 2px solid #ddd; padding: 15px; border-radius: 10px; font-size: 16px; cursor: pointer; text-align: left; }
-        .option-btn:hover { background: #667eea; color: white; }
-        .feedback { font-size: 18px; margin-top: 20px; padding: 10px; border-radius: 10px; }
-        .game-status-banner { background: #e74c3c; color: white; padding: 12px; text-align: center; font-weight: bold; }
-        .waiting-message { text-align: center; padding: 40px; }
-        .waiting-message h2 { color: #667eea; margin-bottom: 20px; }
-        @media (max-width: 768px) { .header h1 { font-size: 1.3em; } .card { padding: 20px; } }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; }
+        .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border: none; border-radius: 10px; width: 100%; cursor: pointer; font-size: 16px; }
+        .demo-warning { background: #fef9e7; border-left: 4px solid #f1c40f; padding: 15px; margin: 20px; border-radius: 8px; font-size: 12px; color: #856404; }
+        .demo-warning a { color: #667eea; }
+        .qr-demo { text-align: center; padding: 20px; background: #f5f5f5; border-radius: 15px; margin: 20px; }
+        @media (max-width: 768px) { .card { padding: 20px; } }
     </style>
 </head>
 <body>
-    <div id="gameStatusBanner" class="game-status-banner">🔴 GAME NOT ACTIVE - Wait for host</div>
-    
     <div class="container">
         <div class="header">
-            <div class="language-selector">
-                <select id="languageSelect" onchange="changeLanguage()">
-                    <option value="en">🇬🇧 English</option>
-                    <option value="it">🇮🇹 Italiano</option>
-                    <option value="fr">🇫🇷 Français</option>
-                    <option value="de">🇩🇪 Deutsch</option>
-                    <option value="es">🇪🇸 Español</option>
+            <h1>🚢 CRUISE GAMES ARENA</h1>
+            <p>Interactive Quiz System for Cruise Ships</p>
+            <div class="demo-badge">🎮 DEMO VERSION - Portfolio Preview</div>
+        </div>
+        
+        <div class="demo-warning">
+            ⚠️ <strong>Demo interattiva</strong> - Questa è una versione dimostrativa del sistema. 
+            I dati non vengono salvati. Per informazioni sul prodotto completo, 
+            <a href="https://github.com/iacreatorcar/Cruise-Games-Arena" target="_blank">contattami</a>.
+        </div>
+
+        <div class="card">
+            <h2>Player Registration</h2>
+            <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" id="playerName" placeholder="Enter your name" value="Demo User">
+            </div>
+            <div class="form-group">
+                <label>Cabin Number *</label>
+                <input type="text" id="cabinNumber" placeholder="e.g., 1234" value="9999">
+            </div>
+            <div class="form-group">
+                <label>Nationality *</label>
+                <select id="nationality">
+                    <option value="Italy">🇮🇹 Italy</option>
+                    <option value="United Kingdom">🇬🇧 United Kingdom</option>
+                    <option value="France">🇫🇷 France</option>
+                    <option value="Germany">🇩🇪 Germany</option>
+                    <option value="Spain">🇪🇸 Spain</option>
                 </select>
             </div>
-            <h1>🚢 CRUISE GAMES ARENA</h1>
-            <p>Interactive Quiz Challenge</p>
+            <button class="btn" onclick="startDemo()">🎮 Start Demo Game</button>
         </div>
-        
-        <div class="card" id="waitingView">
-            <div class="waiting-message">
-                <div style="font-size: 64px;">⏳</div>
-                <h2>Waiting for game to start...</h2>
-                <p>The host will start the game soon.</p>
-            </div>
-        </div>
-        
-        <div class="card" id="registrationView" style="display:none;">
-            <h2 id="registerTitle">Player Registration</h2>
-            <div class="form-group"><label id="nameLabel">Full Name *</label><input type="text" id="playerName" placeholder="Enter your full name"></div>
-            <div class="form-group"><label id="cabinLabel">Cabin Number *</label><input type="text" id="cabinNumber" placeholder="e.g., 1234"></div>
-            <div class="form-group"><label id="nationalityLabel">Nationality *</label>
-                <select id="nationality"><option value="">Select</option><option value="Italy">🇮🇹 Italy</option><option value="USA">🇺🇸 USA</option><option value="UK">🇬🇧 UK</option><option value="France">🇫🇷 France</option><option value="Germany">🇩🇪 Germany</option><option value="Spain">🇪🇸 Spain</option></select>
-            </div>
-            <button class="btn" onclick="registerPlayer()" id="startBtn">Start Game</button>
-        </div>
-        
-        <div class="card" id="quizView" style="display:none;">
-            <div class="question-container">
-                <div class="progress" id="questionProgress"></div>
-                <div class="question-text" id="questionText">Loading...</div>
-                <div class="options-grid" id="optionsContainer"></div>
-                <div class="feedback" id="feedback"></div>
-            </div>
-        </div>
-        
-        <div class="card" id="completeView" style="display:none;">
-            <h2>🎉 Game Complete! 🎉</h2>
-            <div class="final-score" id="finalScore"></div>
-            <button class="btn" onclick="location.reload()">Play Again</button>
+
+        <div class="qr-demo">
+            <p>📱 <strong>QR Code Demo</strong></p>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=https://cruise-games-demo.vercel.app" alt="Demo QR">
+            <p style="font-size: 12px; margin-top: 10px;">Scan to try on mobile</p>
         </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="firebase-config.js"></script>
-
     <script>
-        let currentPlayer = null, currentQuestionIndex = 0, score = 0, errors = 0, questions = [], currentLang = 'en', gameStatus = 'closed';
-        
-        const translations = {
-            en: { registerTitle: "Player Registration", nameLabel: "Full Name *", cabinLabel: "Cabin Number *", nationalityLabel: "Nationality *", startBtn: "Start Game" },
-            it: { registerTitle: "Registrazione Giocatore", nameLabel: "Nome Completo *", cabinLabel: "Numero Cabina *", nationalityLabel: "Nazionalità *", startBtn: "Inizia Gioco" },
-            fr: { registerTitle: "Inscription Joueur", nameLabel: "Nom Complet *", cabinLabel: "Numéro de Cabine *", nationalityLabel: "Nationalité *", startBtn: "Commencer" },
-            de: { registerTitle: "Spielerregistrierung", nameLabel: "Vollständiger Name *", cabinLabel: "Kabinenummer *", nationalityLabel: "Nationalität *", startBtn: "Spiel Starten" },
-            es: { registerTitle: "Registro de Jugador", nameLabel: "Nombre Completo *", cabinLabel: "Número de Cabina *", nationalityLabel: "Nacionalidad *", startBtn: "Comenzar Juego" }
-        };
-        
-        function changeLanguage() {
-            currentLang = document.getElementById('languageSelect').value;
-            const t = translations[currentLang];
-            document.getElementById('registerTitle').innerText = t.registerTitle;
-            document.getElementById('nameLabel').innerText = t.nameLabel;
-            document.getElementById('cabinLabel').innerText = t.cabinLabel;
-            document.getElementById('nationalityLabel').innerText = t.nationalityLabel;
-            document.getElementById('startBtn').innerText = t.startBtn;
-        }
-        
-        async function checkGameStatus() {
-            const gameState = await db.collection('settings').doc('gameState').get();
-            if (gameState.exists) gameStatus = gameState.data().status;
-            const banner = document.getElementById('gameStatusBanner');
-            const waitingView = document.getElementById('waitingView');
-            const registrationView = document.getElementById('registrationView');
-            if (gameStatus === 'active') {
-                banner.innerHTML = '🟢 GAME ACTIVE - You can register!';
-                banner.style.background = '#2ecc71';
-                waitingView.style.display = 'none';
-                registrationView.style.display = 'block';
-            } else {
-                banner.innerHTML = '🔴 GAME NOT ACTIVE - Wait for host';
-                banner.style.background = '#e74c3c';
-                waitingView.style.display = 'block';
-                registrationView.style.display = 'none';
+        function startDemo() {
+            alert("🎮 DEMO MODE\n\nQuesto è un esempio interattivo.\nNel sistema completo:\n✅ Gioco reale con 10 domande\n✅ Classifica live\n✅ Esportazione PDF\n✅ Admin panel per animatore\n✅ Statistiche in tempo reale\n\nPer maggiori informazioni, contattami su GitHub!");
+            
+            // Mock demo - simulazione leggera
+            const name = document.getElementById('playerName').value;
+            if (name) {
+                alert(`Grazie ${name}! La demo mostra l'interfaccia giocatore.\nIl prodotto completo include backend Firebase, classifiche real-time e report PDF.`);
             }
         }
-        
-        async function registerPlayer() {
-            if (gameStatus !== 'active') { alert("Game not started yet!"); return; }
-            const name = document.getElementById('playerName').value;
-            const cabin = document.getElementById('cabinNumber').value;
-            const nationality = document.getElementById('nationality').value;
-            if (!name || !cabin || !nationality) { alert("Please fill all fields!"); return; }
-            if (localStorage.getItem('playerId')) { alert("You already played this game!"); return; }
-            
-            currentPlayer = { id: Date.now().toString(), name, cabin, nationality, score: 0, errors: 0, completed: false };
-            localStorage.setItem('playerId', currentPlayer.id);
-            await db.collection('players').doc(currentPlayer.id).set(currentPlayer);
-            await loadGameData();
-            document.getElementById('registrationView').style.display = 'none';
-            document.getElementById('quizView').style.display = 'block';
-            currentQuestionIndex = 0; score = 0; errors = 0;
-            loadQuestion();
-        }
-        
-        async function loadGameData() {
-            const gameSnapshot = await db.collection('games').doc('active').get();
-            if (gameSnapshot.exists) questions = gameSnapshot.data().questions;
-            else questions = [{ text: "What is the largest ocean?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], correct: 3 }];
-        }
-        
-        function loadQuestion() {
-            if (currentQuestionIndex >= questions.length) { completeGame(); return; }
-            const q = questions[currentQuestionIndex];
-            document.getElementById('questionProgress').innerHTML = `Question ${currentQuestionIndex+1} of ${questions.length}`;
-            document.getElementById('questionText').innerHTML = q.text;
-            document.getElementById('optionsContainer').innerHTML = q.options.map((opt, idx) => `<button class="option-btn" onclick="answerQuestion(${idx})">${String.fromCharCode(65+idx)}. ${opt}</button>`).join('');
-            document.getElementById('feedback').innerHTML = '';
-        }
-        
-        async function answerQuestion(selectedIndex) {
-            const q = questions[currentQuestionIndex];
-            const isCorrect = (selectedIndex === q.correct);
-            document.querySelectorAll('.option-btn').forEach(btn => btn.style.pointerEvents = 'none');
-            if (isCorrect) { score++; document.getElementById('feedback').innerHTML = '<span style="color:green">✅ Correct!</span>'; }
-            else { errors++; document.getElementById('feedback').innerHTML = `<span style="color:red">❌ Wrong! Correct: ${String.fromCharCode(65+q.correct)}. ${q.options[q.correct]}</span>`; }
-            await db.collection('players').doc(currentPlayer.id).update({ score, errors, lastQuestion: currentQuestionIndex });
-            currentQuestionIndex++;
-            setTimeout(() => loadQuestion(), 1500);
-        }
-        
-        async function completeGame() {
-            await db.collection('players').doc(currentPlayer.id).update({ completed: true, finalScore: score, finalErrors: errors });
-            document.getElementById('quizView').style.display = 'none';
-            document.getElementById('completeView').style.display = 'block';
-            document.getElementById('finalScore').innerHTML = `🎯 Your score: ${score}/${questions.length}<br>❌ Errors: ${errors}`;
-            localStorage.removeItem('playerId');
-        }
-        
-        db.collection('settings').doc('gameState').onSnapshot(() => checkGameStatus());
-        changeLanguage();
-        checkGameStatus();
     </script>
 </body>
 </html>
