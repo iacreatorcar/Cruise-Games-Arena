@@ -5,186 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <title>Cruise Games Arena - Player</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
         }
-
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            overflow: hidden;
-        }
-
-        .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            text-align: center;
-            position: relative;
-        }
-
-        .header h1 {
-            font-size: 1.8em;
-            margin-bottom: 5px;
-        }
-
-        .language-selector {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-        }
-
-        .language-selector select {
-            padding: 5px 10px;
-            border-radius: 8px;
-            border: none;
-            background: rgba(255,255,255,0.2);
-            color: white;
-            cursor: pointer;
-        }
-
-        .language-selector select option {
-            color: black;
-        }
-
-        .card {
-            padding: 30px;
-        }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        .form-group input, .form-group select {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-
-        .btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 18px;
-            cursor: pointer;
-            width: 100%;
-            transition: transform 0.3s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .question-container {
-            text-align: center;
-        }
-
-        .progress {
-            font-size: 14px;
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-
-        .question-text {
-            font-size: 24px;
-            margin-bottom: 30px;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .option-btn {
-            background: #f0f0f0;
-            border: 2px solid #ddd;
-            padding: 15px;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-align: left;
-        }
-
-        .option-btn:hover {
-            background: #667eea;
-            color: white;
-            border-color: #667eea;
-        }
-
-        .feedback {
-            font-size: 18px;
-            margin-top: 20px;
-            padding: 10px;
-            border-radius: 10px;
-        }
-
-        .final-score {
-            text-align: center;
-            font-size: 24px;
-            margin: 20px 0;
-            color: #667eea;
-        }
-
-        .waiting-message {
-            text-align: center;
-            padding: 40px;
-        }
-
-        .waiting-message h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-        }
-
-        .game-status-banner {
-            background: #e74c3c;
-            color: white;
-            padding: 12px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .header h1 { font-size: 1.3em; }
-            .question-text { font-size: 20px; }
-            .card { padding: 20px; }
-        }
+        .container { max-width: 600px; margin: 0 auto; background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; text-align: center; position: relative; }
+        .header h1 { font-size: 1.8em; }
+        .language-selector { position: absolute; top: 15px; right: 15px; }
+        .language-selector select { padding: 5px 10px; border-radius: 8px; border: none; background: rgba(255,255,255,0.2); color: white; cursor: pointer; }
+        .card { padding: 30px; }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: bold; color: #333; }
+        .form-group input, .form-group select { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; }
+        .btn { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 15px; border: none; border-radius: 10px; width: 100%; cursor: pointer; font-size: 18px; }
+        .question-container { text-align: center; }
+        .progress { font-size: 14px; color: #667eea; margin-bottom: 20px; }
+        .question-text { font-size: 24px; margin-bottom: 30px; color: #333; font-weight: bold; }
+        .options-grid { display: grid; gap: 12px; margin-bottom: 20px; }
+        .option-btn { background: #f0f0f0; border: 2px solid #ddd; padding: 15px; border-radius: 10px; font-size: 16px; cursor: pointer; text-align: left; }
+        .option-btn:hover { background: #667eea; color: white; }
+        .feedback { font-size: 18px; margin-top: 20px; padding: 10px; border-radius: 10px; }
+        .game-status-banner { background: #e74c3c; color: white; padding: 12px; text-align: center; font-weight: bold; }
+        .waiting-message { text-align: center; padding: 40px; }
+        .waiting-message h2 { color: #667eea; margin-bottom: 20px; }
+        @media (max-width: 768px) { .header h1 { font-size: 1.3em; } .card { padding: 20px; } }
     </style>
 </head>
 <body>
-    <div id="gameStatusBanner" class="game-status-banner">🔴 GIOCO NON ATTIVO - Attendere che l'animatore inizi</div>
+    <div id="gameStatusBanner" class="game-status-banner">🔴 GAME NOT ACTIVE - Wait for host</div>
     
     <div class="container">
         <div class="header">
@@ -198,52 +50,27 @@
                 </select>
             </div>
             <h1>🚢 CRUISE GAMES ARENA</h1>
-            <p id="tagline">Interactive Quiz Challenge</p>
+            <p>Interactive Quiz Challenge</p>
         </div>
         
-        <!-- ATTESA (mostrato quando gioco non attivo) -->
         <div class="card" id="waitingView">
             <div class="waiting-message">
                 <div style="font-size: 64px;">⏳</div>
-                <h2>In attesa che il gioco inizi...</h2>
-                <p>L'animatore avvierà il gioco a breve.</p>
-                <p style="margin-top: 20px; font-size: 14px; color: #888;">Resta su questa schermata, il gioco partirà automaticamente!</p>
+                <h2>Waiting for game to start...</h2>
+                <p>The host will start the game soon.</p>
             </div>
         </div>
         
-        <!-- REGISTRAZIONE -->
         <div class="card" id="registrationView" style="display:none;">
             <h2 id="registerTitle">Player Registration</h2>
-            <div class="form-group">
-                <label id="nameLabel">Full Name *</label>
-                <input type="text" id="playerName" placeholder="Enter your full name">
-            </div>
-            <div class="form-group">
-                <label id="cabinLabel">Cabin Number *</label>
-                <input type="text" id="cabinNumber" placeholder="e.g., 1234">
-            </div>
-            <div class="form-group">
-                <label id="nationalityLabel">Nationality *</label>
-                <select id="nationality">
-                    <option value="">Select nationality</option>
-                    <option value="Italy">🇮🇹 Italy</option>
-                    <option value="United Kingdom">🇬🇧 United Kingdom</option>
-                    <option value="France">🇫🇷 France</option>
-                    <option value="Germany">🇩🇪 Germany</option>
-                    <option value="Spain">🇪🇸 Spain</option>
-                    <option value="USA">🇺🇸 USA</option>
-                    <option value="Canada">🇨🇦 Canada</option>
-                    <option value="Australia">🇦🇺 Australia</option>
-                    <option value="Brazil">🇧🇷 Brazil</option>
-                    <option value="Japan">🇯🇵 Japan</option>
-                    <option value="China">🇨🇳 China</option>
-                    <option value="India">🇮🇳 India</option>
-                </select>
+            <div class="form-group"><label id="nameLabel">Full Name *</label><input type="text" id="playerName" placeholder="Enter your full name"></div>
+            <div class="form-group"><label id="cabinLabel">Cabin Number *</label><input type="text" id="cabinNumber" placeholder="e.g., 1234"></div>
+            <div class="form-group"><label id="nationalityLabel">Nationality *</label>
+                <select id="nationality"><option value="">Select</option><option value="Italy">🇮🇹 Italy</option><option value="USA">🇺🇸 USA</option><option value="UK">🇬🇧 UK</option><option value="France">🇫🇷 France</option><option value="Germany">🇩🇪 Germany</option><option value="Spain">🇪🇸 Spain</option></select>
             </div>
             <button class="btn" onclick="registerPlayer()" id="startBtn">Start Game</button>
         </div>
         
-        <!-- QUIZ -->
         <div class="card" id="quizView" style="display:none;">
             <div class="question-container">
                 <div class="progress" id="questionProgress"></div>
@@ -253,287 +80,111 @@
             </div>
         </div>
         
-        <!-- COMPLETATO -->
         <div class="card" id="completeView" style="display:none;">
-            <h2 id="completeTitle">🎉 Game Complete! 🎉</h2>
-            <p id="completeMessage">Thank you for playing!</p>
+            <h2>🎉 Game Complete! 🎉</h2>
             <div class="final-score" id="finalScore"></div>
-            <button class="btn" onclick="location.reload()" id="newGameBtn">Play Again</button>
+            <button class="btn" onclick="location.reload()">Play Again</button>
         </div>
     </div>
 
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
     <script src="firebase-config.js"></script>
-    
+
     <script>
-        let currentPlayer = null;
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let errors = 0;
-        let questions = [];
-        let currentLang = 'en';
-        let gameActive = false;
-        let gameStatus = 'closed';
+        let currentPlayer = null, currentQuestionIndex = 0, score = 0, errors = 0, questions = [], currentLang = 'en', gameStatus = 'closed';
         
         const translations = {
-            en: {
-                registerTitle: "Player Registration",
-                nameLabel: "Full Name *",
-                cabinLabel: "Cabin Number *",
-                nationalityLabel: "Nationality *",
-                startBtn: "Start Game",
-                completeTitle: "🎉 Game Complete! 🎉",
-                completeMessage: "Thank you for playing!",
-                newGameBtn: "Play Again"
-            },
-            it: {
-                registerTitle: "Registrazione Giocatore",
-                nameLabel: "Nome Completo *",
-                cabinLabel: "Numero Cabina *",
-                nationalityLabel: "Nazionalità *",
-                startBtn: "Inizia Gioco",
-                completeTitle: "🎉 Gioco Completato! 🎉",
-                completeMessage: "Grazie per aver giocato!",
-                newGameBtn: "Gioca Ancora"
-            },
-            fr: {
-                registerTitle: "Inscription Joueur",
-                nameLabel: "Nom Complet *",
-                cabinLabel: "Numéro de Cabine *",
-                nationalityLabel: "Nationalité *",
-                startBtn: "Commencer",
-                completeTitle: "🎉 Jeu Terminé! 🎉",
-                completeMessage: "Merci d'avoir joué!",
-                newGameBtn: "Rejouer"
-            },
-            de: {
-                registerTitle: "Spielerregistrierung",
-                nameLabel: "Vollständiger Name *",
-                cabinLabel: "Kabinenummer *",
-                nationalityLabel: "Nationalität *",
-                startBtn: "Spiel Starten",
-                completeTitle: "🎉 Spiel Beendet! 🎉",
-                completeMessage: "Danke fürs Spielen!",
-                newGameBtn: "Nochmal Spielen"
-            },
-            es: {
-                registerTitle: "Registro de Jugador",
-                nameLabel: "Nombre Completo *",
-                cabinLabel: "Número de Cabina *",
-                nationalityLabel: "Nacionalidad *",
-                startBtn: "Comenzar Juego",
-                completeTitle: "🎉 ¡Juego Completado! 🎉",
-                completeMessage: "¡Gracias por jugar!",
-                newGameBtn: "Jugar de Nuevo"
-            }
+            en: { registerTitle: "Player Registration", nameLabel: "Full Name *", cabinLabel: "Cabin Number *", nationalityLabel: "Nationality *", startBtn: "Start Game" },
+            it: { registerTitle: "Registrazione Giocatore", nameLabel: "Nome Completo *", cabinLabel: "Numero Cabina *", nationalityLabel: "Nazionalità *", startBtn: "Inizia Gioco" },
+            fr: { registerTitle: "Inscription Joueur", nameLabel: "Nom Complet *", cabinLabel: "Numéro de Cabine *", nationalityLabel: "Nationalité *", startBtn: "Commencer" },
+            de: { registerTitle: "Spielerregistrierung", nameLabel: "Vollständiger Name *", cabinLabel: "Kabinenummer *", nationalityLabel: "Nationalität *", startBtn: "Spiel Starten" },
+            es: { registerTitle: "Registro de Jugador", nameLabel: "Nombre Completo *", cabinLabel: "Número de Cabina *", nationalityLabel: "Nacionalidad *", startBtn: "Comenzar Juego" }
         };
-        
-        // Controlla lo stato del gioco in tempo reale
-        async function checkGameStatus() {
-            try {
-                const gameState = await db.collection('settings').doc('gameState').get();
-                if (gameState.exists) {
-                    gameStatus = gameState.data().status;
-                    
-                    if (gameStatus === 'active') {
-                        gameActive = true;
-                        document.getElementById('gameStatusBanner').innerHTML = '🟢 GIOCO ATTIVO - Puoi registrarti e giocare! 🟢';
-                        document.getElementById('gameStatusBanner').style.background = '#2ecc71';
-                        document.getElementById('waitingView').style.display = 'none';
-                        document.getElementById('registrationView').style.display = 'block';
-                    } else if (gameStatus === 'waiting') {
-                        gameActive = false;
-                        document.getElementById('gameStatusBanner').innerHTML = '🟡 GIOCO IN PAUSA - Chi è già dentro può finire, nuove registrazioni chiuse 🟡';
-                        document.getElementById('gameStatusBanner').style.background = '#f39c12';
-                        document.getElementById('waitingView').style.display = 'block';
-                        document.getElementById('registrationView').style.display = 'none';
-                        document.getElementById('quizView').style.display = 'none';
-                    } else {
-                        gameActive = false;
-                        document.getElementById('gameStatusBanner').innerHTML = '🔴 GIOCO NON ATTIVO - Attendere che l\'animatore inizi 🔴';
-                        document.getElementById('gameStatusBanner').style.background = '#e74c3c';
-                        document.getElementById('waitingView').style.display = 'block';
-                        document.getElementById('registrationView').style.display = 'none';
-                        document.getElementById('quizView').style.display = 'none';
-                    }
-                }
-            } catch (error) {
-                console.error("Error checking game status:", error);
-            }
-        }
         
         function changeLanguage() {
             currentLang = document.getElementById('languageSelect').value;
-            updateUITexts();
+            const t = translations[currentLang];
+            document.getElementById('registerTitle').innerText = t.registerTitle;
+            document.getElementById('nameLabel').innerText = t.nameLabel;
+            document.getElementById('cabinLabel').innerText = t.cabinLabel;
+            document.getElementById('nationalityLabel').innerText = t.nationalityLabel;
+            document.getElementById('startBtn').innerText = t.startBtn;
         }
         
-        function updateUITexts() {
-            const t = translations[currentLang];
-            if (document.getElementById('registerTitle')) 
-                document.getElementById('registerTitle').innerText = t.registerTitle;
-            if (document.getElementById('nameLabel')) 
-                document.getElementById('nameLabel').innerText = t.nameLabel;
-            if (document.getElementById('cabinLabel')) 
-                document.getElementById('cabinLabel').innerText = t.cabinLabel;
-            if (document.getElementById('nationalityLabel')) 
-                document.getElementById('nationalityLabel').innerText = t.nationalityLabel;
-            if (document.getElementById('startBtn')) 
-                document.getElementById('startBtn').innerText = t.startBtn;
-            if (document.getElementById('completeTitle')) 
-                document.getElementById('completeTitle').innerText = t.completeTitle;
-            if (document.getElementById('completeMessage')) 
-                document.getElementById('completeMessage').innerText = t.completeMessage;
-            if (document.getElementById('newGameBtn')) 
-                document.getElementById('newGameBtn').innerText = t.newGameBtn;
+        async function checkGameStatus() {
+            const gameState = await db.collection('settings').doc('gameState').get();
+            if (gameState.exists) gameStatus = gameState.data().status;
+            const banner = document.getElementById('gameStatusBanner');
+            const waitingView = document.getElementById('waitingView');
+            const registrationView = document.getElementById('registrationView');
+            if (gameStatus === 'active') {
+                banner.innerHTML = '🟢 GAME ACTIVE - You can register!';
+                banner.style.background = '#2ecc71';
+                waitingView.style.display = 'none';
+                registrationView.style.display = 'block';
+            } else {
+                banner.innerHTML = '🔴 GAME NOT ACTIVE - Wait for host';
+                banner.style.background = '#e74c3c';
+                waitingView.style.display = 'block';
+                registrationView.style.display = 'none';
+            }
         }
         
         async function registerPlayer() {
-            // Verifica che il gioco sia attivo
-            if (gameStatus !== 'active') {
-                alert("⚠️ Il gioco non è ancora iniziato! Attendere che l'animatore avvii la sessione.");
-                return;
-            }
-            
+            if (gameStatus !== 'active') { alert("Game not started yet!"); return; }
             const name = document.getElementById('playerName').value;
             const cabin = document.getElementById('cabinNumber').value;
             const nationality = document.getElementById('nationality').value;
+            if (!name || !cabin || !nationality) { alert("Please fill all fields!"); return; }
+            if (localStorage.getItem('playerId')) { alert("You already played this game!"); return; }
             
-            if (!name || !cabin || !nationality) {
-                alert("Please fill all fields!");
-                return;
-            }
-            
-            currentPlayer = {
-                id: Date.now().toString(),
-                name: name,
-                cabin: cabin,
-                nationality: nationality,
-                score: 0,
-                errors: 0,
-                completed: false,
-                timestamp: new Date()
-            };
-            
-            try {
-                await db.collection('players').doc(currentPlayer.id).set(currentPlayer);
-                console.log("Player registered:", currentPlayer.name);
-                
-                await loadGameData();
-                
-                document.getElementById('registrationView').style.display = 'none';
-                document.getElementById('quizView').style.display = 'block';
-                currentQuestionIndex = 0;
-                score = 0;
-                errors = 0;
-                loadQuestion();
-            } catch (error) {
-                console.error("Registration error:", error);
-                alert("Error starting game. Please try again.");
-            }
+            currentPlayer = { id: Date.now().toString(), name, cabin, nationality, score: 0, errors: 0, completed: false };
+            localStorage.setItem('playerId', currentPlayer.id);
+            await db.collection('players').doc(currentPlayer.id).set(currentPlayer);
+            await loadGameData();
+            document.getElementById('registrationView').style.display = 'none';
+            document.getElementById('quizView').style.display = 'block';
+            currentQuestionIndex = 0; score = 0; errors = 0;
+            loadQuestion();
         }
         
         async function loadGameData() {
-            try {
-                const gameSnapshot = await db.collection('games').doc('active').get();
-                if (gameSnapshot.exists) {
-                    const gameData = gameSnapshot.data();
-                    questions = gameData.questions;
-                } else {
-                    // Default questions
-                    questions = [
-                        {text: "What is the largest ocean on Earth?", options: ["Atlantic Ocean", "Indian Ocean", "Arctic Ocean", "Pacific Ocean"], correct: 3},
-                        {text: "Which Italian city is famous for its canals?", options: ["Rome", "Venice", "Florence", "Naples"], correct: 1},
-                        {text: "What is the capital of France?", options: ["London", "Berlin", "Paris", "Madrid"], correct: 2},
-                        {text: "Which of these is a Caribbean island?", options: ["Sicily", "Barbados", "Mallorca", "Crete"], correct: 1},
-                        {text: "What is the world's largest cruise ship brand?", options: ["Carnival", "Royal Caribbean", "Norwegian", "MSC"], correct: 1}
-                    ];
-                }
-                console.log("Questions loaded:", questions.length);
-            } catch (error) {
-                console.error("Error loading questions:", error);
-            }
+            const gameSnapshot = await db.collection('games').doc('active').get();
+            if (gameSnapshot.exists) questions = gameSnapshot.data().questions;
+            else questions = [{ text: "What is the largest ocean?", options: ["Atlantic", "Indian", "Arctic", "Pacific"], correct: 3 }];
         }
         
         function loadQuestion() {
-            if (currentQuestionIndex >= questions.length) {
-                completeGame();
-                return;
-            }
-            
+            if (currentQuestionIndex >= questions.length) { completeGame(); return; }
             const q = questions[currentQuestionIndex];
-            const qText = typeof q.text === 'object' ? (q.text[currentLang] || q.text.en) : q.text;
-            const qOptions = typeof q.options === 'object' ? (q.options[currentLang] || q.options.en) : q.options;
-            
-            document.getElementById('questionProgress').innerHTML = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
-            document.getElementById('questionText').innerHTML = qText;
-            
-            const optionsHtml = qOptions.map((opt, idx) => 
-                `<button class="option-btn" onclick="answerQuestion(${idx})">${String.fromCharCode(65+idx)}. ${opt}</button>`
-            ).join('');
-            document.getElementById('optionsContainer').innerHTML = optionsHtml;
+            document.getElementById('questionProgress').innerHTML = `Question ${currentQuestionIndex+1} of ${questions.length}`;
+            document.getElementById('questionText').innerHTML = q.text;
+            document.getElementById('optionsContainer').innerHTML = q.options.map((opt, idx) => `<button class="option-btn" onclick="answerQuestion(${idx})">${String.fromCharCode(65+idx)}. ${opt}</button>`).join('');
             document.getElementById('feedback').innerHTML = '';
         }
         
         async function answerQuestion(selectedIndex) {
             const q = questions[currentQuestionIndex];
             const isCorrect = (selectedIndex === q.correct);
-            
-            const buttons = document.querySelectorAll('.option-btn');
-            buttons.forEach(btn => btn.style.pointerEvents = 'none');
-            
-            if (isCorrect) {
-                score++;
-                document.getElementById('feedback').innerHTML = '<span style="color:green">✅ Correct!</span>';
-            } else {
-                errors++;
-                const qOptions = typeof q.options === 'object' ? (q.options[currentLang] || q.options.en) : q.options;
-                document.getElementById('feedback').innerHTML = `<span style="color:red">❌ Wrong! Correct answer: ${String.fromCharCode(65+q.correct)}. ${qOptions[q.correct]}</span>`;
-            }
-            
-            try {
-                await db.collection('players').doc(currentPlayer.id).update({
-                    score: score,
-                    errors: errors,
-                    lastQuestion: currentQuestionIndex
-                });
-            } catch (error) {
-                console.error("Error updating score:", error);
-            }
-            
+            document.querySelectorAll('.option-btn').forEach(btn => btn.style.pointerEvents = 'none');
+            if (isCorrect) { score++; document.getElementById('feedback').innerHTML = '<span style="color:green">✅ Correct!</span>'; }
+            else { errors++; document.getElementById('feedback').innerHTML = `<span style="color:red">❌ Wrong! Correct: ${String.fromCharCode(65+q.correct)}. ${q.options[q.correct]}</span>`; }
+            await db.collection('players').doc(currentPlayer.id).update({ score, errors, lastQuestion: currentQuestionIndex });
             currentQuestionIndex++;
-            
-            setTimeout(() => {
-                loadQuestion();
-            }, 1500);
+            setTimeout(() => loadQuestion(), 1500);
         }
         
         async function completeGame() {
-            try {
-                await db.collection('players').doc(currentPlayer.id).update({
-                    completed: true,
-                    finalScore: score,
-                    finalErrors: errors,
-                    completionTime: new Date()
-                });
-            } catch (error) {
-                console.error("Error completing game:", error);
-            }
-            
+            await db.collection('players').doc(currentPlayer.id).update({ completed: true, finalScore: score, finalErrors: errors });
             document.getElementById('quizView').style.display = 'none';
             document.getElementById('completeView').style.display = 'block';
             document.getElementById('finalScore').innerHTML = `🎯 Your score: ${score}/${questions.length}<br>❌ Errors: ${errors}`;
+            localStorage.removeItem('playerId');
         }
         
-        // Ascolta cambiamenti in tempo reale dello stato del gioco
-        if (db) {
-            db.collection('settings').doc('gameState').onSnapshot(() => {
-                checkGameStatus();
-            });
-        }
-        
-        // Inizializzazione
-        updateUITexts();
+        db.collection('settings').doc('gameState').onSnapshot(() => checkGameStatus());
+        changeLanguage();
         checkGameStatus();
     </script>
 </body>

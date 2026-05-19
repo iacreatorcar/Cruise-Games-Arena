@@ -1,13 +1,13 @@
-# Environment variables (IMPORTANTE: NON committare!)
+# Firebase (NON su GitHub!)
+firebase-config.js
+!firebase-config.example.js
+
+# Environment variables
 .env
 .env.local
 .env.*.local
 
-# Firebase keys (sicurezza)
-firebase-config.js
-!firebase-config.example.js
-
-# Node modules (se usi npm)
+# Node modules
 node_modules/
 npm-debug.log*
 
@@ -23,30 +23,10 @@ dist/
 build/
 .temp/
 *.log
+tmp/
 
 # Firebase local emulator
 .firebase/
 
 # Vercel
 .vercel/
-# File sensibili (NON su GitHub!)
-.env
-.env.*
-firebase-config.js
-
-# Dipendenze
-node_modules/
-
-# IDE
-.vscode/
-.DS_Store
-
-# Log
-*.log
-
-# Temp
-.temp/
-tmp/.env
-firebase-config.js
-.vscode/
-node_modules/
