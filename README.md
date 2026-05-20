@@ -120,6 +120,7 @@ Step 5: All players complete → system calculates winners automatically
 
 </div>
 *Screenshots from the live demo system*
+
 ---
 
 ## 🚀 Live Demo
