@@ -16,7 +16,7 @@
 
 <br>
 
-<img src="assets/dashboard.png" width="800" alt="Cruise Games Arena Dashboard" style="border-radius: 20px; border: 1px solid #333;">
+<img src="assets/admin-thumb" width="800" alt="Cruise Games Arena Dashboard" style="border-radius: 20px; border: 1px solid #333;">
 
 </div>
 
