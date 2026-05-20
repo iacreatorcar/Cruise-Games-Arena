@@ -16,7 +16,17 @@
 
 <br>
 
-<img src="assets/admin-thumb" width="800" alt="Cruise Games Arena Dashboard" style="border-radius: 20px; border: 1px solid #333;">
+## 🖼️ Screenshots
+
+<div align="center">
+
+| Admin Dashboard | Public Display | Player View |
+|:---:|:---:|:---:|
+| <img src="assets/admin-thumb.png" width="350" alt="Admin Dashboard"> | <img src="assets/display-thumb.png" width="350" alt="Public Display"> | <img src="assets/player-thumb.png" width="180" alt="Player View"> |
+
+</div>
+*Screenshots from the live demo system*
+
 
 </div>
 
@@ -107,19 +117,6 @@ Step 5: All players complete → system calculates winners automatically
 | Answer submission | Less than 1 second |
 | Rankings update | Less than 1 second |
 | Concurrent players | 100+ supported |
-
----
-
-## 🖼️ Screenshots
-
-<div align="center">
-
-| Admin Dashboard | Public Display | Player View |
-|:---:|:---:|:---:|
-| <img src="assets/admin-thumb.png" width="350" alt="Admin Dashboard"> | <img src="assets/display-thumb.png" width="350" alt="Public Display"> | <img src="assets/player-thumb.png" width="180" alt="Player View"> |
-
-</div>
-*Screenshots from the live demo system*
 
 ---
 
