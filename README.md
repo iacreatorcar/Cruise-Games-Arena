@@ -116,10 +116,10 @@ Step 5: All players complete → system calculates winners automatically
 
 | Admin Dashboard | Public Display | Player View |
 |:---:|:---:|:---:|
-| *Screenshot coming soon* | *Screenshot coming soon* | *Screenshot coming soon* |
+| <img src="assets/admin-thumb.png" width="350" alt="Admin Dashboard"> | <img src="assets/display-thumb.png" width="350" alt="Public Display"> | <img src="assets/player-thumb.png" width="180" alt="Player View"> |
 
 </div>
-
+*Screenshots from the live demo system*
 ---
 
 ## 🚀 Live Demo
